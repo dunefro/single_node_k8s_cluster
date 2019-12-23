@@ -1,0 +1,51 @@
+#!/bin/bash
+
+echo -e "Installing docker on the host system ..."
+sudo apt-get update -y
+sudo apt-get remove docker docker-engine docker.io -y 
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker $USER
+if [[ $(docker --version | grep "Docker version") == " " ]]
+then
+    echo -e "Docker is not installed\n"
+else
+    echo -e "Docker is installed\n"
+fi
+
+echo -e "Installing Kubernetes Now...\n"
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
+sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
+echo -e "Installing Kubeadm ...\n"
+sudo apt install kubeadm -y
+kubeadm version -o json
+echo -e "Disabling swap Memory...\n"
+sudo swapoff -a
+
+echo -e "DO YOU WANT TO CONTINUE WITH THE HOSTNAME: $HOSTNAME ? [Type yes/no]"
+read response
+if [[ $response == "no" ]]
+then
+    echo -e "Enter the new hostname : "
+    read host_name
+    sudo hostnamectl set-hostname $host_name
+    exec bash
+fi
+
+echo -e "Kubeadm init ... \n"
+sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+
+echo -e "Completing the installtion process...\n"
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+echo -e "Tainting nodes...\n"
+kubectl taint nodes --all node-role.kubernetes.io/master-
+
+echo -e "Deploying flannel ...\n"
+sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+
+
+
