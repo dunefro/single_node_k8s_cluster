@@ -45,7 +45,7 @@ echo -e "Tainting nodes...\n"
 kubectl taint nodes --all node-role.kubernetes.io/master-
 
 echo -e "Deploying flannel ...\n"
-sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
 
 
