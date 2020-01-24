@@ -30,7 +30,6 @@ if [[ $response == "no" ]]
     echo -e "Enter the new hostname : "
     read host_name
     sudo hostnamectl set-hostname $host_name
-    exec bash
 fi
 
 echo -e "Kubeadm init ... \n"
