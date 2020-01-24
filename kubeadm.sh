@@ -46,5 +46,5 @@ kubectl taint nodes --all node-role.kubernetes.io/master-
 echo -e "Deploying flannel ...\n"
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
-
-
+sleep 45
+echo -e "Kubernetes is deployed"
