@@ -26,7 +26,7 @@ sudo swapoff -a
 echo -e "DO YOU WANT TO CONTINUE WITH THE HOSTNAME: $HOSTNAME ? [Type yes/no]"
 read response
 if [[ $response == "no" ]]
-then
+    then
     echo -e "Enter the new hostname : "
     read host_name
     sudo hostnamectl set-hostname $host_name
