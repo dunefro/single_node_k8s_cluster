@@ -23,6 +23,7 @@ kubeadm version -o json
 echo -e "Disabling swap Memory...\n"
 sudo swapoff -a
 
+host_name=$HOSTNAME
 echo -e "DO YOU WANT TO CONTINUE WITH THE HOSTNAME: $HOSTNAME ? [Type yes/no]"
 read response
 if [[ $response == "no" ]]
@@ -42,6 +43,9 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
 echo -e "Tainting nodes...\n"
 kubectl taint nodes --all node-role.kubernetes.io/master-
+
+echo -e "Labeling master...\n"
+kubectl label node $host_name type=master
 
 echo -e "Deploying flannel ...\n"
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
