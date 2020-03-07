@@ -1,2 +1,2 @@
 # single_node_k8s_cluster
-Single node kubernetes cluster script
+Single node kubernetes cluster script alongwith seperate docker script.
