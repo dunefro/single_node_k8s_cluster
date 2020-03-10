@@ -1,4 +1,4 @@
 #!/bin/bash
 
 set -x
-echo "testing script"
+echo "testing script 123"
