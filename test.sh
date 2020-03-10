@@ -1,3 +1,3 @@
 #!/bin/bash
 set -x
-echo "testing 123"
+echo "testing 1234"
