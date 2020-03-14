@@ -46,7 +46,7 @@ kubectl taint nodes --all node-role.kubernetes.io/master-
 
 echo -e "Labeling master...\n"
 kubectl label node $host_name type=master
-
+echo -e "\n"
 echo -e "Deploying flannel ...\n"
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
