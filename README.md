@@ -10,6 +10,7 @@ A simple cluster configuration setup for kubernetes as well as docker.
 Initalise the kubernetes cluster with ease so that it can be installed on the fly.
 
 ## Deployments
+Deployments are based on kubeadm
 
 ### How to contribute
 
