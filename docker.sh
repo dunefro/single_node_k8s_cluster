@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -x
-echo -e "Installing docker on the host system ..."
+echo -e "Installing docker on the host system ...\n"
 sudo apt-get update -y
 sudo apt-get remove docker docker-engine docker.io -y 
 sudo apt install docker.io -y
