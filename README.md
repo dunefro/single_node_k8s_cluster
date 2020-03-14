@@ -7,6 +7,8 @@ A simple cluster configuration setup for kubernetes as well as docker.
 
 ## Purpose
 
+Initalise the kubernetes cluster with ease so that it can be installed on the fly.
+
 ## Deployments
 
 ### How to contribute
