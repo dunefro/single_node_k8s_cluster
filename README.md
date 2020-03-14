@@ -7,5 +7,7 @@ A simple cluster configuration setup for kubernetes as well as docker.
 
 ## Purpose
 
+## Deployments
+
 ### How to contribute
 
