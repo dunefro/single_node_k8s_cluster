@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -x
-echo -e "Installation of  docker on the host system ...\n"
 sudo apt-get update -y
 sudo apt-get remove docker docker-engine docker.io -y 
 sudo apt install docker.io -y
@@ -15,4 +14,3 @@ else
     echo -e "Docker is installed\n"
 fi
 
-echo -e "\nTo run the docker container ls command you might neet to exit this shell and relogin again"
