@@ -7,7 +7,7 @@ A simple cluster configuration setup for kubernetes as well as docker.
 
 ## Purpose
 
-Initalise the kubernetes cluster with ease so that it can be installed on the fly. Also a seperate docker setup file for ubuntu machines.
+Initalise the kubernetes cluster with ease so that it can be installed on the fly. Also a seperate docker setup file for ubuntu machines. The purpose is to ease the deployment of services on kubenetes.
 
 ## Deployments
 Deployments are based on kubeadm
