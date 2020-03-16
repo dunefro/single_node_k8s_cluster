@@ -11,7 +11,7 @@ if [[ $(docker --version | grep "Docker version") == " " ]]
 then
     echo -e "Docker is not installed\n"
 else
-    echo -e "Docker is installed\n"
+    echo -e "Docker is now installed\n"
 fi
 
 echo -e "Installing Kubernetes Now...\n"
