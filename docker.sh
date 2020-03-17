@@ -13,4 +13,4 @@ then
 else
     echo -e "Docker is installed\n"
 fi
-
+echo -e "\nTo run the docker container ls command you might neet to exit this shell and relogin again"
