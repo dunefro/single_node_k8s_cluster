@@ -9,7 +9,7 @@ sudo systemctl enable docker
 sudo usermod -aG docker $USER
 if [[ $(docker --version | grep "Docker version") == " " ]]
 then
-    echo -e "Docker is not installed\n"
+    echo -e "Docker is not installed properly\n"
 else
     echo -e "Docker is installed\n"
 fi
