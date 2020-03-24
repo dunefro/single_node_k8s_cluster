@@ -60,3 +60,5 @@ echo -e "Deployed Helm...\n"
 rm -rf ./get_helm.sh
 helm version
 echo -e '\n'
+echo -e '
+'
