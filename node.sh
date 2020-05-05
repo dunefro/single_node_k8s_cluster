@@ -1,4 +1,5 @@
-#!/bin/bash
+#
+/bin/bash
 
 echo -e "Installation of docker on the host system ...\n"
 sudo apt-get update -y
@@ -33,25 +34,6 @@ if [[ $response == "no" ]]
     sudo hostnamectl set-hostname $host_name
 fi
 
-echo -e "Kubeadm init ... \n"
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16
-
-echo -e "Completing the installtion process...\n"
-mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config
-echo -e "\n"
-echo -e "Tainting nodes...\n"
-kubectl taint nodes --all node-role.kubernetes.io/master-
-
-echo -e "Labeling master...\n"
-kubectl label node $host_name type=master
-echo -e "\n"
-echo -e "Deploying flannel ...\n"
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-
-sleep 45
-echo -e "Kubernetes is deployed\n\n"
 echo -e "Deploying latest Helm package manager...\n"
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 chmod 700 get_helm.sh
