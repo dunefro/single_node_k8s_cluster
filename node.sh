@@ -1,5 +1,4 @@
-#
-/bin/bash
+#!/bin/bash
 
 echo -e "Installation of docker on the host system ...\n"
 sudo apt-get update -y
