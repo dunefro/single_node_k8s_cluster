@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo -e "Installation of docker on the host system ...\n"
+echo -e "----------> Step 1: Installation of docker on the host system ...\n"
 sudo apt-get update -y
 sudo apt-get remove docker docker-engine docker.io -y 
 sudo apt install docker.io -y
@@ -14,7 +14,7 @@ else
     echo -e "Docker is installed...\n"
 fi
 
-echo -e "Installing Kubernetes Now...\n"
+echo -e "----------> Step 2: Installing Kubernetes Now...\n"
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
 sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
 echo -e "Installing Kubeadm ...\n"
