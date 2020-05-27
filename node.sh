@@ -17,10 +17,10 @@ fi
 echo -e "----------> Step 2: Installing Kubernetes Now...\n"
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
 sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
-echo -e "Installing Kubeadm ...\n"
+echo -e "----------> Step 2: (A) Installing Kubeadm ...\n"
 sudo apt install kubeadm -y
 kubeadm version -o json
-echo -e "Disabling swap Memory...\n"
+echo -e "----------> Step 2: (B) Disabling swap Memory...\n"
 sudo swapoff -a
 
 host_name=$HOSTNAME
@@ -33,7 +33,7 @@ if [[ $response == "no" ]]
     sudo hostnamectl set-hostname $host_name
 fi
 
-echo -e "Deploying latest Helm package manager...\n"
+echo -e "----------> Step 3: Deploying latest Helm package manager...\n"
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
 chmod 700 get_helm.sh
 ./get_helm.sh
