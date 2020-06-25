@@ -7,3 +7,5 @@ sudo systemctl restart docker
 sudo iptables -F
 
 sudo iptables -tnat -F
+
+sudo rm -rf /etc/kubernetes
