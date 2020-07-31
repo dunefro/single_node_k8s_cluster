@@ -43,6 +43,8 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 echo -e "\n"
 echo -e "Tainting nodes...\n"
 kubectl taint nodes --all node-role.kubernetes.io/master-
+echo -e "Adding Autocomplete feature for kubectl like commands"
+echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 echo -e "Labeling master...\n"
 kubectl label node $host_name type=master
