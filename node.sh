@@ -38,5 +38,6 @@ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scr
 chmod 700 get_helm.sh
 ./get_helm.sh
 echo -e "Deployed Helm...\n"
+echo 'source <(helm completion bash)' >> ~/.bashrc
 rm -rf ./get_helm.sh
 helm version
