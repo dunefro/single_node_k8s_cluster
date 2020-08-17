@@ -17,3 +17,5 @@ sudo iptables -tnat -F
 sudo rm -rf /etc/kubernetes
 
 sudo ip link delete cni0
+
+sudo rm -rf ~/.kube
