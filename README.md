@@ -12,8 +12,8 @@ Initalise the kubernetes cluster with ease so that it can be installed on the fl
 ## Deployments
 Deployments are based on kubeadm and deployed on ubuntu.
 
-## Securiy Reports
-# Master
+## Security Reports
+### Master
 ```
 [INFO] 1 Master Node Security Configuration
 [INFO] 1.1 Master Node Configuration Files
@@ -152,7 +152,7 @@ for example:
 9 checks WARN
 0 checks INFO
 ```
-# Worker Node
+### Worker Node
 ```
 [INFO] 4 Worker Node Security Configuration
 [INFO] 4.1 Worker Node Configuration Files
