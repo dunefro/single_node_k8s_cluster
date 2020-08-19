@@ -34,7 +34,7 @@ if [[ $response == "no" ]]
 fi
 
 echo -e "Kubeadm init ... \n"
-sudo kubeadm init --pod-network-cidr=10.244.0.0/16
+sudo kubeadm init --config=config.yaml
 
 echo -e "Completing the installtion process...\n"
 mkdir -p $HOME/.kube
