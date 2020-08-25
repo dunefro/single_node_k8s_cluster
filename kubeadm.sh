@@ -33,7 +33,7 @@ then
     echo -e "Docker is not installed\n"
     exit 1
 else
-    echo -e "\n      --------------> Docker is installed...\n"
+    echo -e "Step 1 (A) --------------> Docker is installed...\n"
     echo $(docker --version)
 fi
 
@@ -46,10 +46,10 @@ call_break
 echo -e "\nStep 2 --------------> Setting up Kubernetes Now...\n"
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add > /dev/null 2>&1
 sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main" > /dev/null 2>&1
-echo -e "\n      --------------> Installing Kubeadm ...\n"
+echo -e "\nStep 2 (A) --------------> Installing Kubeadm ...\n"
 sudo apt install kubeadm -y > /dev/null 2>&1
 kubeadm version -o json
-echo -e "\n      --------------> Disabling swap Memory...\n"
+echo -e "\nStep 2 (B) --------------> Disabling swap Memory...\n"
 sudo swapoff -a
 
 if [ -z $MASTER_HOSTNAME ]
@@ -65,7 +65,7 @@ then
 else
     host_name=$MASTER_HOSTNAME
 fi
-echo -e "\n      --------------> Setting up Hostname: $host_name\n"
+echo -e "\nStep 2 (C) --------------> Setting up Hostname: $host_name\n"
 
 cat > /tmp/config.yaml <<EOF
 apiServer:
@@ -118,7 +118,7 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config > /dev/null 2>&1
 # echo -e "Tainting nodes...\n"
 # kubectl taint nodes --all node-role.kubernetes.io/master-
 
-echo -e "\n      --------------> Adding Autocomplete feature for kubectl like commands" 
+echo -e "\nStep 4 (A) --------------> Adding Autocomplete feature for kubectl like commands" 
 echo "source <(kubectl completion bash)" >> ~/.bashrc
 
 call_break
