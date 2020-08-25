@@ -57,7 +57,7 @@ then
 else
     host_name=$MASTER_HOSTNAME
 fi
-cat > config.yaml <<EOF
+cat > /tmp/config.yaml <<EOF
 apiServer:
   extraArgs:
     authorization-mode: Node,RBAC
@@ -93,7 +93,7 @@ scheduler:
 EOF
 sudo hostnamectl set-hostname $host_name
 echo -e "Kubeadm init ... \n"
-sudo kubeadm init --config=config.yaml
+sudo kubeadm init --config=/tmp/config.yaml
 
 echo -e "Completing the installtion process...\n"
 mkdir -p $HOME/.kube
@@ -121,8 +121,3 @@ echo -e "Deployed Helm...\n"
 echo 'source <(helm completion bash)' >> ~/.bashrc
 rm -rf ./get_helm.sh
 helm version
-
-# sudo cat > /var/lib/kubelet/kubeadm-flags.env <<EOF 
-sudo cat > /root/hey.txt <<EOF 
-KUBELET_KUBEADM_ARGS="--cgroup-driver=cgroupfs --network-plugin=cni --pod-infra-container-image=k8s.gcr.io/pause:3.2 --resolv-conf=/run/systemd/resolve/resolv.conf --tls-cert-file=/var/lib/kubelet/pki/kubelet.crt --tls-private-key-file=/var/lib/kubelet/pki/kubelet.key --feature-gates=RotateKubeletServerCertificate=true --protect-kernel-defaults=true --tls-cipher-suites=TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_256_GCM_SHA384,TLS_RSA_WITH_AES_128_GCM_SHA256"
-EOF
