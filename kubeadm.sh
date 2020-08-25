@@ -30,10 +30,10 @@ else
     echo -e "Docker is installed...\n"
 fi
 
-echo -e "Installing Kubernetes Now...\n"
+echo -e "\n\nInstalling Kubernetes Now...\n"
 curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add
 sudo apt-add-repository "deb http://apt.kubernetes.io/ kubernetes-xenial main"
-echo -e "Installing Kubeadm ...\n"
+echo -e "\n\nInstalling Kubeadm ...\n"
 sudo apt install kubeadm -y
 kubeadm version -o json
 echo -e "Disabling swap Memory...\n"
