@@ -1,5 +1,21 @@
 #!/bin/bash
 
+while [ -n "$1" ]
+do
+    key=$1
+    case $key in
+
+    -h|--hostname)
+        shift;
+        MASTER_HOSTNAME=$1;
+        ;;
+    *)
+        shift;
+        ;;
+    esac
+done
+
+
 echo -e "Installation of docker on the host system ...\n"
 sudo apt-get update -y
 sudo apt-get remove docker docker-engine docker.io -y 
@@ -28,16 +44,54 @@ echo 'KUBELET_KUBEADM_ARGS="--cgroup-driver=cgroupfs --network-plugin=cni --pod-
 sudo systemctl daemon-reload
 sudo systemctl restart kubelet
 
-host_name=$HOSTNAME
-echo -e "DO YOU WANT TO CONTINUE WITH THE HOSTNAME: $HOSTNAME ? [Type yes/no]"
-read response
-if [[ $response == "no" ]]
+if [ -z $MASTER_HOSTNAME ]
+then
+    host_name=$HOSTNAME
+    echo -e "DO YOU WANT TO CONTINUE WITH THE HOSTNAME: $HOSTNAME ? [Type yes/no]"
+    read response
+    if [[ $response == "no" ]]
     then
-    echo -e "Enter the new hostname : "
-    read host_name
-    sudo hostnamectl set-hostname $host_name
+        echo -e "Enter the new hostname : "
+        read host_name
+    fi
+else
+    host_name=$MASTER_HOSTNAME
 fi
-
+cat > config.yaml <<EOF
+apiServer:
+  extraArgs:
+    authorization-mode: Node,RBAC
+    enable-admission-plugins: "NodeRestriction,AlwaysPullImages"
+    audit-log-path: /var/log/apiserver/audit.log
+    audit-log-maxage: "30"
+    audit-log-maxbackup: "10"
+    audit-log-maxsize: "2048"
+    profiling: "false"
+  timeoutForControlPlane: 4m0s
+apiVersion: kubeadm.k8s.io/v1beta2
+certificatesDir: /etc/kubernetes/pki
+clusterName: kubernetes
+controllerManager:
+  extraArgs:
+    profiling: "false"
+    feature-gates: "RotateKubeletServerCertificate=true"
+dns:
+  type: CoreDNS
+etcd:
+  local:
+    dataDir: /var/lib/etcd
+imageRepository: k8s.gcr.io
+kind: ClusterConfiguration
+kubernetesVersion: v1.18.8
+networking:
+  dnsDomain: cluster.local
+  podSubnet: 10.244.0.0/16
+  serviceSubnet: 10.96.0.0/12
+scheduler:
+  extraArgs:
+    profiling: "false"
+EOF
+sudo hostnamectl set-hostname $host_name
 echo -e "Kubeadm init ... \n"
 sudo kubeadm init --config=config.yaml
 
